@@ -1,0 +1,7 @@
+Medha
+Copyright 2026 Medha contributors
+
+This product includes software and model weights developed by third parties.
+See THIRD_PARTY_NOTICES.md, LICENSES/, and MODEL_LICENSES/ for the full list.
+Model weights are not distributed in this repository; they are fetched by
+tools/fetch_models.py under their original licenses.

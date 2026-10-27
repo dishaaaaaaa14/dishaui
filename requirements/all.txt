@@ -1,0 +1,7 @@
+-r base.txt
+-r cpu.txt
+-r render.txt
+-r ingest.txt
+-r rag.txt
+-r tts.txt
+-r dev.txt

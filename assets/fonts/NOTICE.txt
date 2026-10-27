@@ -1,0 +1,17 @@
+Hershey vector font glyph data
+==============================
+
+File: futural.jhf (Hershey Futural / Roman Simplex style)
+Source: https://github.com/kamalmostafa/hershey-fonts
+
+The Hershey Fonts were originally created by Dr. A. V. Hershey while working at
+the U. S. National Bureau of Standards. The .jhf format was created by James
+Hurt. This distribution may be used for any purpose, commercial or otherwise,
+provided that the acknowledgements above are distributed with the font data and
+that the data is not converted into the U.S. NTIS format.
+
+Full terms: ../../LICENSES/LicenseRef-Hershey.txt
+
+Our converter (tools/build_hershey.py) extracts the glyph strokes into
+assets/fonts/hershey.json. The GPLv2+ libhersheyfont library code is not
+included or used.

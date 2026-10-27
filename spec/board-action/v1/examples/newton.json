@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0.0",
+  "lesson_id": "newton2-demo",
+  "title": "Newton's Second Law",
+  "subject": "physics",
+  "target_concept": "newton_second_law",
+  "difficulty": "beginner",
+  "style_id": "default",
+  "steps": [
+    {
+      "id": "s1",
+      "concept": "force, mass, acceleration",
+      "narration": "Newton's second law connects force, mass, and acceleration. It says that force equals mass times acceleration.",
+      "board": [
+        {
+          "op": "write_text",
+          "id": "a1",
+          "text": "Newton's Second Law",
+          "region": "title",
+          "duration_ms": 900,
+          "start": {"sentence": 0, "char": 0}
+        },
+        {
+          "op": "write_math",
+          "id": "a2",
+          "latex": "F = m a",
+          "rect": {"x": 0.08, "y": 0.24, "w": 0.34, "h": 0.14},
+          "duration_ms": 1600,
+          "start": {"sentence": 0, "char": 34}
+        },
+        {
+          "op": "draw",
+          "id": "a3",
+          "shape": "axes",
+          "rect": {"x": 0.55, "y": 0.22, "w": 0.36, "h": 0.46},
+          "label": "a vs F",
+          "duration_ms": 900,
+          "start": {"sentence": 1, "char": 0}
+        },
+        {
+          "op": "draw",
+          "id": "a4",
+          "shape": "arrow",
+          "points": [{"x": 0.58, "y": 0.62}, {"x": 0.80, "y": 0.30}],
+          "label": "F",
+          "duration_ms": 600,
+          "start": {"sentence": 1, "char": 24}
+        },
+        {
+          "op": "point",
+          "id": "a5",
+          "at": {"x": 0.72, "y": 0.45},
+          "duration_ms": 400
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "concept": "inverse relationship with mass",
+      "narration": "If the mass doubles while the force stays the same, the acceleration halves. We can see that in the equation.",
+      "board": [
+        {
+          "op": "write_math",
+          "id": "a6",
+          "latex": "a = \\frac{F}{m}",
+          "rect": {"x": 0.08, "y": 0.53, "w": 0.30, "h": 0.12},
+          "duration_ms": 1400,
+          "start": {"sentence": 0, "char": 0}
+        },
+        {
+          "op": "write_text",
+          "id": "a7",
+          "text": "mass doubles -> a halves",
+          "rect": {"x": 0.08, "y": 0.70, "w": 0.42, "h": 0.08},
+          "duration_ms": 900,
+          "start": {"sentence": 1, "char": 0}
+        },
+        {
+          "op": "highlight",
+          "id": "a8",
+          "target": "a6",
+          "color": "yellow",
+          "duration_ms": 500,
+          "start": {"sentence": 1, "char": 12}
+        },
+        {
+          "op": "pause",
+          "id": "a9",
+          "duration_ms": 800
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "concept": "intuition with a truck",
+      "narration": "This is why a loaded truck accelerates more slowly than a small car. Same engine force, more mass.",
+      "board": [
+        {
+          "op": "image",
+          "id": "a10",
+          "tags": ["truck", "car", "physics"],
+          "rect": {"x": 0.56, "y": 0.55, "w": 0.34, "h": 0.24},
+          "duration_ms": 700,
+          "start": {"sentence": 0, "char": 0}
+        },
+        {
+          "op": "write_text",
+          "id": "a11",
+          "text": "Same force, more mass -> less acceleration",
+          "region": "bottom",
+          "duration_ms": 1100,
+          "start": {"sentence": 1, "char": 0}
+        },
+        {
+          "op": "scroll",
+          "id": "a12",
+          "amount": 0.35,
+          "duration_ms": 600
+        }
+      ],
+      "checkpoint": {
+        "question": "If the mass doubles and the force stays constant, what happens to acceleration?",
+        "expected": "It halves.",
+        "hints": ["Start from a = F / m."]
+      }
+    }
+  ],
+  "meta": {
+    "model": "hardcoded",
+    "prompt_version": "p0",
+    "style_id": "default",
+    "estimated_duration_s": 55
+  }
+}

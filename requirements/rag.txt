@@ -1,0 +1,9 @@
+# Retrieval. CPU ONNX only; do not install onnxruntime-gpu.
+chromadb>=1.5,<2
+onnxruntime>=1.18,<2
+tokenizers>=0.20
+sentencepiece>=0.2
+huggingface-hub>=0.26
+tiktoken>=0.7,<1
+# Native CPU transformers for the B6 reranker and B7 SmolVLM image describer.
+transformers>=4.45,<6

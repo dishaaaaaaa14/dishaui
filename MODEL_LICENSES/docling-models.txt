@@ -1,0 +1,69 @@
+Model: docling-models
+Job: PDF table structure
+License: CDLA-Permissive-2.0 OR Apache-2.0
+Source: https://huggingface.co/docling-project/docling-models
+Revision: fc0f2d45e2218ea24bce5045f58a389aed16dc23
+Fetched: 2026-10-27T09:11:54+00:00
+------------------------------------------------------------------------
+CDLA Permissive License 2.0
+
+Copyright 2025 Docling Models ONNX Contributors
+
+The Community Data License Agreement - Permissive - Version 2.0
+
+This is the Community Data License Agreement - Permissive, Version 2.0 ("Agreement"). Data is provided to You under this Agreement by each of the Data Providers. Your exercise of any of the rights and permissions granted below constitutes Your acceptance and agreement to be bound by the terms and conditions of this Agreement.
+
+Section 1. Definitions
+
+a. "Data" means the information, content, data, code, or other materials made available under this Agreement.
+
+b. "Data Provider" means any person or entity that makes Data available under this Agreement.
+
+c. "Enhanced Data" means Data that You have modified, adapted, processed, or combined with other information or data.
+
+d. "Result" means anything (including Data) that You develop or improve using Data, in whole or in part.
+
+e. "You" (or "Your") means an individual or Legal Entity exercising permissions granted by this Agreement.
+
+Section 2. Data License Grant
+
+Subject to the terms and conditions of this Agreement, each Data Provider hereby grants to You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable (except as stated in Section 5.b) license to use, copy, modify, and distribute the Data, in whole or in part, for any lawful purpose.
+
+Section 3. Patent Grant
+
+Subject to the terms and conditions of this Agreement, each Data Provider hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in Section 5.b) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer Results, where such license applies only to those patent claims licensable by such Data Provider that are necessarily infringed by their Data alone or by combination of their Data with other materials.
+
+Section 4. Distribution
+
+You may distribute Data under the terms of this Agreement, provided that:
+
+a. You include a copy of this Agreement with the Data; and
+
+b. If the Data includes a "Notice" text file as part of its distribution, You must include a readable copy of the attribution notices contained within such Notice file with any distribution of the Data, excluding those notices that do not pertain to any part of the distributed Data.
+
+You may distribute Enhanced Data under the terms and conditions of Your choice, provided that Your use for such distribution is otherwise compliant with this Agreement. You are not required to distribute Enhanced Data.
+
+Section 5. Data License Obligations
+
+a. If You distribute Data, You may not impose any additional restrictions on the recipient with respect to the Data.
+
+b. Each Data Provider reserves the right to terminate Your rights under this Agreement if You materially breach the terms of this Agreement and do not cure such breach within thirty (30) days after being notified of the breach by the Data Provider.
+
+Section 6. Disclaimer of Warranties and Limitation of Liability
+
+UNLESS OTHERWISE MUTUALLY AGREED TO BY THE PARTIES IN WRITING, DATA PROVIDERS OFFER THE DATA AS-IS AND AS-AVAILABLE, AND MAKE NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE DATA, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT KNOWN OR DISCOVERABLE.
+
+IN NO EVENT WILL ANY DATA PROVIDER BE LIABLE TO YOU ON ANY LEGAL THEORY FOR ANY SPECIAL, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, OR EXEMPLARY DAMAGES ARISING OUT OF THE USE OF THE DATA, EVEN IF THE DATA PROVIDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+Section 7. General
+
+a. If any provision of this Agreement is held to be unenforceable, such provision shall be reformed only to the extent necessary to make it enforceable.
+
+b. This Agreement shall be governed by the laws of the jurisdiction in which the Data Provider is located, without regard to conflict of laws principles.
+
+c. The Data Providers retain all rights not expressly granted to You in this Agreement.
+
+---
+
+This license applies to the ONNX model files derived from the original Docling models. 
+The original Docling project and associated code maintain their respective licenses.

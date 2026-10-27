@@ -1,0 +1,211 @@
+{
+  "schema_version": "1.0.0",
+  "lesson_id": "newton-second-law-demo",
+  "title": "Newton's Second Law",
+  "subject": "physics",
+  "target_concept": "newton_second_law",
+  "difficulty": "beginner",
+  "style_id": "default",
+  "steps": [
+    {
+      "id": "s1",
+      "concept": "force, mass and acceleration",
+      "narration": "Newton's second law connects force, mass and acceleration. In symbols, force equals mass times acceleration.",
+      "board": [
+        {
+          "op": "write_text",
+          "id": "a1",
+          "text": "Newton's Second Law",
+          "region": "title",
+          "duration_ms": 900,
+          "start": {"sentence": 0, "char": 0}
+        },
+        {
+          "op": "write_math",
+          "id": "a2",
+          "latex": "F = m a",
+          "rect": {"x": 0.07, "y": 0.27, "w": 0.36, "h": 0.14},
+          "duration_ms": 1500,
+          "start": {"sentence": 1, "char": 0}
+        },
+        {
+          "op": "draw",
+          "id": "a3",
+          "shape": "axes",
+          "rect": {"x": 0.58, "y": 0.25, "w": 0.32, "h": 0.38},
+          "label": "a vs F",
+          "duration_ms": 850,
+          "start": {"sentence": 1, "char": 14}
+        },
+        {
+          "op": "draw",
+          "id": "a4",
+          "shape": "arrow",
+          "points": [{"x": 0.61, "y": 0.57}, {"x": 0.84, "y": 0.31}],
+          "label": "F",
+          "duration_ms": 650,
+          "start": {"sentence": 1, "char": 36}
+        },
+        {
+          "op": "point",
+          "id": "a5",
+          "at": {"x": 0.71, "y": 0.45},
+          "duration_ms": 450
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "concept": "doubling force",
+      "narration": "Push the same cart harder and it speeds up more. Double the force and the acceleration doubles too.",
+      "board": [
+        {
+          "op": "write_math",
+          "id": "a6",
+          "latex": "2F \\to 2a",
+          "rect": {"x": 0.07, "y": 0.54, "w": 0.30, "h": 0.10},
+          "duration_ms": 1200,
+          "start": {"sentence": 0, "char": 0}
+        },
+        {
+          "op": "draw",
+          "id": "a7",
+          "shape": "arrow",
+          "points": [{"x": 0.61, "y": 0.62}, {"x": 0.89, "y": 0.39}],
+          "label": "2F",
+          "duration_ms": 700,
+          "start": {"sentence": 0, "char": 10}
+        },
+        {
+          "op": "highlight",
+          "id": "a8",
+          "target": "a7",
+          "color": "yellow",
+          "duration_ms": 600,
+          "start": {"sentence": 1, "char": 0}
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "concept": "inverse relationship with mass",
+      "narration": "Now keep the force fixed and add mass. The equation rearranges to a equals F divided by m, so more mass means less acceleration.",
+      "board": [
+        {
+          "op": "clear",
+          "id": "a9",
+          "duration_ms": 100,
+          "start": {"sentence": 0, "char": 0}
+        },
+        {
+          "op": "write_text",
+          "id": "a10",
+          "text": "Same force, more mass",
+          "region": "title",
+          "duration_ms": 900,
+          "start": {"sentence": 0, "char": 0}
+        },
+        {
+          "op": "write_math",
+          "id": "a11",
+          "latex": "a = \\frac{F}{m}",
+          "rect": {"x": 0.07, "y": 0.30, "w": 0.38, "h": 0.14},
+          "duration_ms": 1700,
+          "start": {"sentence": 1, "char": 0}
+        },
+        {
+          "op": "draw",
+          "id": "a12",
+          "shape": "block",
+          "rect": {"x": 0.62, "y": 0.38, "w": 0.16, "h": 0.16},
+          "label": "m",
+          "duration_ms": 600,
+          "start": {"sentence": 1, "char": 24}
+        },
+        {
+          "op": "draw",
+          "id": "a13",
+          "shape": "arrow",
+          "points": [{"x": 0.47, "y": 0.46}, {"x": 0.60, "y": 0.46}],
+          "label": "F",
+          "duration_ms": 500,
+          "start": {"sentence": 1, "char": 32}
+        },
+        {
+          "op": "highlight",
+          "id": "a14",
+          "target": "a11",
+          "color": "yellow",
+          "duration_ms": 600,
+          "start": {"sentence": 1, "char": 50}
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "concept": "intuition with a loaded truck",
+      "narration": "A loaded truck needs a bigger force for the same acceleration. That is why it feels sluggish compared with a small car. What happens to acceleration if mass doubles?",
+      "board": [
+        {
+          "op": "clear",
+          "id": "a15",
+          "duration_ms": 100,
+          "start": {"sentence": 0, "char": 0}
+        },
+        {
+          "op": "write_text",
+          "id": "a16",
+          "text": "Loaded truck",
+          "region": "title",
+          "duration_ms": 800,
+          "start": {"sentence": 0, "char": 0}
+        },
+        {
+          "op": "draw",
+          "id": "a17",
+          "shape": "line",
+          "points": [{"x": 0.55, "y": 0.57}, {"x": 0.88, "y": 0.57}],
+          "duration_ms": 900,
+          "start": {"sentence": 0, "char": 18}
+        },
+        {
+          "op": "draw",
+          "id": "a18",
+          "shape": "block",
+          "rect": {"x": 0.62, "y": 0.45, "w": 0.16, "h": 0.12},
+          "label": "m",
+          "duration_ms": 500,
+          "start": {"sentence": 0, "char": 28}
+        },
+        {
+          "op": "draw",
+          "id": "a19",
+          "shape": "arrow",
+          "points": [{"x": 0.47, "y": 0.51}, {"x": 0.60, "y": 0.51}],
+          "label": "F",
+          "duration_ms": 550,
+          "start": {"sentence": 0, "char": 38}
+        },
+        {
+          "op": "write_text",
+          "id": "a20",
+          "text": "same F, larger m -> smaller a",
+          "region": "bottom",
+          "duration_ms": 1100,
+          "start": {"sentence": 1, "char": 0}
+        }
+      ],
+      "checkpoint": {
+        "question": "If mass doubles while force stays the same, what happens to acceleration?",
+        "expected": "It halves, because a = F / m.",
+        "hints": ["Use the rearranged equation a = F / m."]
+      }
+    }
+  ],
+  "meta": {
+    "model": "hardcoded",
+    "prompt_version": "p0",
+    "style_id": "default",
+    "estimated_duration_s": 36
+  }
+}

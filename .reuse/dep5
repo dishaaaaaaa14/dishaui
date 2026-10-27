@@ -1,0 +1,40 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Medha
+Source: https://example.invalid/medha
+Comment: Machine-readable licensing. Model weights are fetched and are not part of this repository.
+
+Files: *
+Copyright: 2026 Medha contributors
+License: Apache-2.0
+
+Files: spec/**
+Copyright: 2026 Medha contributors
+License: Apache-2.0
+
+Files: content/**
+Copyright: 2026 Medha contributors
+License: CC-BY-4.0
+
+Files: assets/images/**
+Copyright: 2026 Medha contributors
+License: CC-BY-4.0
+
+Files: assets/fonts/futural.jhf
+Copyright: A. V. Hershey; James Hurt
+License: LicenseRef-Hershey
+
+Files: assets/fonts/hershey.json
+Copyright: A. V. Hershey; James Hurt; 2026 Medha contributors
+License: LicenseRef-Hershey
+
+Files: assets/voices/**
+Copyright: 2026 Medha contributors
+License: Apache-2.0
+
+Files: LICENSES/**
+Copyright: 2026 Medha contributors
+License: Apache-2.0
+
+Files: MODEL_LICENSES/**
+Copyright: 2026 Medha contributors
+License: Apache-2.0

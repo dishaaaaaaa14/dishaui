@@ -1,0 +1,5 @@
+# CPU-only torch. Never install the CUDA wheel: it competes with Ollama for VRAM.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch>=2.4,<3
+torchaudio>=2.4,<3
+torchvision>=0.19,<1

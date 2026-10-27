@@ -1,0 +1,1251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "medha.board-action/v1/lesson.schema.json",
+  "title": "Medha Lesson Script v1",
+  "version": "1.0.0",
+  "schema": {
+    "$defs": {
+      "Anchor": {
+        "additionalProperties": false,
+        "properties": {
+          "sentence": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Sentence",
+            "type": "integer"
+          },
+          "char": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Char",
+            "type": "integer"
+          }
+        },
+        "title": "Anchor",
+        "type": "object"
+      },
+      "BulletListAction": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "duration_ms": {
+            "default": 800,
+            "maximum": 120000,
+            "minimum": 50,
+            "title": "Duration Ms",
+            "type": "integer"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Anchor"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "op": {
+            "const": "bullet_list",
+            "title": "Op",
+            "type": "string"
+          },
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 12,
+            "minItems": 1,
+            "title": "Items",
+            "type": "array"
+          },
+          "region": {
+            "default": "auto",
+            "enum": [
+              "auto",
+              "title",
+              "left",
+              "center",
+              "right",
+              "top",
+              "bottom",
+              "full"
+            ],
+            "title": "Region",
+            "type": "string"
+          },
+          "rect": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Rect"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "style": {
+            "$ref": "#/$defs/TextStyle"
+          },
+          "item_gap": {
+            "default": 0.07,
+            "maximum": 0.2,
+            "minimum": 0.02,
+            "title": "Item Gap",
+            "type": "number"
+          },
+          "speed": {
+            "default": 0.045,
+            "maximum": 1.0,
+            "minimum": 0.005,
+            "title": "Speed",
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "op",
+          "items"
+        ],
+        "title": "BulletListAction",
+        "type": "object"
+      },
+      "Checkpoint": {
+        "additionalProperties": false,
+        "properties": {
+          "question": {
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Question",
+            "type": "string"
+          },
+          "expected": {
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Expected",
+            "type": "string"
+          },
+          "hints": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 5,
+            "title": "Hints",
+            "type": "array"
+          }
+        },
+        "required": [
+          "question",
+          "expected"
+        ],
+        "title": "Checkpoint",
+        "type": "object"
+      },
+      "ClearAction": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "duration_ms": {
+            "default": 800,
+            "maximum": 120000,
+            "minimum": 50,
+            "title": "Duration Ms",
+            "type": "integer"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Anchor"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "op": {
+            "const": "clear",
+            "title": "Op",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "op"
+        ],
+        "title": "ClearAction",
+        "type": "object"
+      },
+      "DrawAction": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "duration_ms": {
+            "default": 800,
+            "maximum": 120000,
+            "minimum": 50,
+            "title": "Duration Ms",
+            "type": "integer"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Anchor"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "op": {
+            "const": "draw",
+            "title": "Op",
+            "type": "string"
+          },
+          "shape": {
+            "enum": [
+              "line",
+              "arrow",
+              "polyline",
+              "circle",
+              "ellipse",
+              "rect",
+              "axes",
+              "spring",
+              "block",
+              "incline",
+              "pulley",
+              "resistor",
+              "battery",
+              "waveform",
+              "atom",
+              "graph",
+              "grid"
+            ],
+            "title": "Shape",
+            "type": "string"
+          },
+          "points": {
+            "items": {
+              "$ref": "#/$defs/Pos"
+            },
+            "maxItems": 64,
+            "title": "Points",
+            "type": "array"
+          },
+          "rect": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Rect"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "filled": {
+            "default": false,
+            "title": "Filled",
+            "type": "boolean"
+          },
+          "color": {
+            "default": "diagram",
+            "enum": [
+              "chalk",
+              "math",
+              "diagram",
+              "yellow",
+              "red",
+              "blue",
+              "green",
+              "orange",
+              "white"
+            ],
+            "title": "Color",
+            "type": "string"
+          },
+          "width": {
+            "default": 3.0,
+            "maximum": 12.0,
+            "minimum": 0.5,
+            "title": "Width",
+            "type": "number"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Label"
+          }
+        },
+        "required": [
+          "id",
+          "op",
+          "shape"
+        ],
+        "title": "DrawAction",
+        "type": "object"
+      },
+      "EraseAction": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "duration_ms": {
+            "default": 800,
+            "maximum": 120000,
+            "minimum": 50,
+            "title": "Duration Ms",
+            "type": "integer"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Anchor"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "op": {
+            "const": "erase",
+            "title": "Op",
+            "type": "string"
+          },
+          "target": {
+            "anyOf": [
+              {
+                "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Target"
+          },
+          "region": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Rect"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "id",
+          "op"
+        ],
+        "title": "EraseAction",
+        "type": "object"
+      },
+      "HighlightAction": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "duration_ms": {
+            "default": 800,
+            "maximum": 120000,
+            "minimum": 50,
+            "title": "Duration Ms",
+            "type": "integer"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Anchor"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "op": {
+            "const": "highlight",
+            "title": "Op",
+            "type": "string"
+          },
+          "target": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+            "title": "Target",
+            "type": "string"
+          },
+          "color": {
+            "default": "yellow",
+            "enum": [
+              "chalk",
+              "math",
+              "diagram",
+              "yellow",
+              "red",
+              "blue",
+              "green",
+              "orange",
+              "white"
+            ],
+            "title": "Color",
+            "type": "string"
+          },
+          "width": {
+            "default": 6.0,
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Width",
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "op",
+          "target"
+        ],
+        "title": "HighlightAction",
+        "type": "object"
+      },
+      "ImageAction": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "duration_ms": {
+            "default": 800,
+            "maximum": 120000,
+            "minimum": 50,
+            "title": "Duration Ms",
+            "type": "integer"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Anchor"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "op": {
+            "const": "image",
+            "title": "Op",
+            "type": "string"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 8,
+            "minItems": 1,
+            "title": "Tags",
+            "type": "array"
+          },
+          "rect": {
+            "$ref": "#/$defs/Rect"
+          },
+          "fade_ms": {
+            "default": 500,
+            "maximum": 5000,
+            "minimum": 100,
+            "title": "Fade Ms",
+            "type": "integer"
+          },
+          "opacity": {
+            "default": 1.0,
+            "maximum": 1.0,
+            "minimum": 0.1,
+            "title": "Opacity",
+            "type": "number"
+          },
+          "caption": {
+            "anyOf": [
+              {
+                "maxLength": 160,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Caption"
+          }
+        },
+        "required": [
+          "id",
+          "op",
+          "tags",
+          "rect"
+        ],
+        "title": "ImageAction",
+        "type": "object"
+      },
+      "LessonMeta": {
+        "additionalProperties": false,
+        "properties": {
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Model"
+          },
+          "prompt_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Prompt Version"
+          },
+          "material_hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Material Hash"
+          },
+          "style_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Style Id"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Created At"
+          },
+          "estimated_duration_s": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Estimated Duration S"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 50,
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "title": "LessonMeta",
+        "type": "object"
+      },
+      "LessonStep": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "concept": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Concept",
+            "type": "string"
+          },
+          "narration": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Narration",
+            "type": "string"
+          },
+          "board": {
+            "items": {
+              "discriminator": {
+                "mapping": {
+                  "bullet_list": "#/$defs/BulletListAction",
+                  "clear": "#/$defs/ClearAction",
+                  "draw": "#/$defs/DrawAction",
+                  "erase": "#/$defs/EraseAction",
+                  "highlight": "#/$defs/HighlightAction",
+                  "image": "#/$defs/ImageAction",
+                  "pause": "#/$defs/PauseAction",
+                  "point": "#/$defs/PointAction",
+                  "scroll": "#/$defs/ScrollAction",
+                  "write_math": "#/$defs/WriteMathAction",
+                  "write_text": "#/$defs/WriteTextAction"
+                },
+                "propertyName": "op"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/WriteTextAction"
+                },
+                {
+                  "$ref": "#/$defs/WriteMathAction"
+                },
+                {
+                  "$ref": "#/$defs/DrawAction"
+                },
+                {
+                  "$ref": "#/$defs/ImageAction"
+                },
+                {
+                  "$ref": "#/$defs/HighlightAction"
+                },
+                {
+                  "$ref": "#/$defs/EraseAction"
+                },
+                {
+                  "$ref": "#/$defs/PointAction"
+                },
+                {
+                  "$ref": "#/$defs/ScrollAction"
+                },
+                {
+                  "$ref": "#/$defs/PauseAction"
+                },
+                {
+                  "$ref": "#/$defs/ClearAction"
+                },
+                {
+                  "$ref": "#/$defs/BulletListAction"
+                }
+              ]
+            },
+            "maxItems": 50,
+            "title": "Board",
+            "type": "array"
+          },
+          "checkpoint": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Checkpoint"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "id",
+          "concept",
+          "narration"
+        ],
+        "title": "LessonStep",
+        "type": "object"
+      },
+      "PauseAction": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "duration_ms": {
+            "default": 800,
+            "maximum": 120000,
+            "minimum": 50,
+            "title": "Duration Ms",
+            "type": "integer"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Anchor"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "op": {
+            "const": "pause",
+            "title": "Op",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "op"
+        ],
+        "title": "PauseAction",
+        "type": "object"
+      },
+      "PointAction": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "duration_ms": {
+            "default": 800,
+            "maximum": 120000,
+            "minimum": 50,
+            "title": "Duration Ms",
+            "type": "integer"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Anchor"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "op": {
+            "const": "point",
+            "title": "Op",
+            "type": "string"
+          },
+          "at": {
+            "$ref": "#/$defs/Pos"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Label"
+          },
+          "color": {
+            "default": "yellow",
+            "enum": [
+              "chalk",
+              "math",
+              "diagram",
+              "yellow",
+              "red",
+              "blue",
+              "green",
+              "orange",
+              "white"
+            ],
+            "title": "Color",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "op",
+          "at"
+        ],
+        "title": "PointAction",
+        "type": "object"
+      },
+      "Pos": {
+        "additionalProperties": false,
+        "properties": {
+          "x": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "X",
+            "type": "number"
+          },
+          "y": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Y",
+            "type": "number"
+          }
+        },
+        "required": [
+          "x",
+          "y"
+        ],
+        "title": "Pos",
+        "type": "object"
+      },
+      "Rect": {
+        "additionalProperties": false,
+        "properties": {
+          "x": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "X",
+            "type": "number"
+          },
+          "y": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Y",
+            "type": "number"
+          },
+          "w": {
+            "exclusiveMinimum": 0.0,
+            "maximum": 1.0,
+            "title": "W",
+            "type": "number"
+          },
+          "h": {
+            "exclusiveMinimum": 0.0,
+            "maximum": 1.0,
+            "title": "H",
+            "type": "number"
+          }
+        },
+        "required": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ],
+        "title": "Rect",
+        "type": "object"
+      },
+      "ScrollAction": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "duration_ms": {
+            "default": 800,
+            "maximum": 120000,
+            "minimum": 50,
+            "title": "Duration Ms",
+            "type": "integer"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Anchor"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "op": {
+            "const": "scroll",
+            "title": "Op",
+            "type": "string"
+          },
+          "amount": {
+            "default": 0.45,
+            "exclusiveMinimum": 0.0,
+            "maximum": 1.0,
+            "title": "Amount",
+            "type": "number"
+          },
+          "direction": {
+            "default": "up",
+            "enum": [
+              "up",
+              "down"
+            ],
+            "title": "Direction",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "op"
+        ],
+        "title": "ScrollAction",
+        "type": "object"
+      },
+      "TextStyle": {
+        "additionalProperties": false,
+        "properties": {
+          "font_size": {
+            "default": 1.0,
+            "maximum": 4.0,
+            "minimum": 0.2,
+            "title": "Font Size",
+            "type": "number"
+          },
+          "color": {
+            "default": "chalk",
+            "enum": [
+              "chalk",
+              "math",
+              "diagram",
+              "yellow",
+              "red",
+              "blue",
+              "green",
+              "orange",
+              "white"
+            ],
+            "title": "Color",
+            "type": "string"
+          },
+          "bold": {
+            "default": false,
+            "title": "Bold",
+            "type": "boolean"
+          },
+          "underline": {
+            "default": false,
+            "title": "Underline",
+            "type": "boolean"
+          },
+          "align": {
+            "default": "left",
+            "enum": [
+              "left",
+              "center",
+              "right"
+            ],
+            "title": "Align",
+            "type": "string"
+          }
+        },
+        "title": "TextStyle",
+        "type": "object"
+      },
+      "WriteMathAction": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "duration_ms": {
+            "default": 800,
+            "maximum": 120000,
+            "minimum": 50,
+            "title": "Duration Ms",
+            "type": "integer"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Anchor"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "op": {
+            "const": "write_math",
+            "title": "Op",
+            "type": "string"
+          },
+          "latex": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Latex",
+            "type": "string"
+          },
+          "region": {
+            "default": "auto",
+            "enum": [
+              "auto",
+              "title",
+              "left",
+              "center",
+              "right",
+              "top",
+              "bottom",
+              "full"
+            ],
+            "title": "Region",
+            "type": "string"
+          },
+          "rect": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Rect"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "font_size": {
+            "default": 1.4,
+            "maximum": 4.0,
+            "minimum": 0.3,
+            "title": "Font Size",
+            "type": "number"
+          },
+          "color": {
+            "default": "math",
+            "enum": [
+              "chalk",
+              "math",
+              "diagram",
+              "yellow",
+              "red",
+              "blue",
+              "green",
+              "orange",
+              "white"
+            ],
+            "title": "Color",
+            "type": "string"
+          },
+          "speed": {
+            "default": 0.06,
+            "maximum": 1.0,
+            "minimum": 0.005,
+            "title": "Speed",
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "op",
+          "latex"
+        ],
+        "title": "WriteMathAction",
+        "type": "object"
+      },
+      "WriteTextAction": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "duration_ms": {
+            "default": 800,
+            "maximum": 120000,
+            "minimum": 50,
+            "title": "Duration Ms",
+            "type": "integer"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Anchor"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "op": {
+            "const": "write_text",
+            "title": "Op",
+            "type": "string"
+          },
+          "text": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          },
+          "region": {
+            "default": "auto",
+            "enum": [
+              "auto",
+              "title",
+              "left",
+              "center",
+              "right",
+              "top",
+              "bottom",
+              "full"
+            ],
+            "title": "Region",
+            "type": "string"
+          },
+          "rect": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Rect"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "style": {
+            "$ref": "#/$defs/TextStyle"
+          },
+          "speed": {
+            "default": 0.045,
+            "maximum": 1.0,
+            "minimum": 0.005,
+            "title": "Speed",
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "op",
+          "text"
+        ],
+        "title": "WriteTextAction",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": "1.0.0",
+        "default": "1.0.0",
+        "title": "Schema Version",
+        "type": "string"
+      },
+      "lesson_id": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$",
+        "title": "Lesson Id",
+        "type": "string"
+      },
+      "title": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Title",
+        "type": "string"
+      },
+      "subject": {
+        "default": "general",
+        "enum": [
+          "math",
+          "physics",
+          "chemistry",
+          "electronics",
+          "ai",
+          "general"
+        ],
+        "title": "Subject",
+        "type": "string"
+      },
+      "target_concept": {
+        "anyOf": [
+          {
+            "maxLength": 120,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Target Concept"
+      },
+      "difficulty": {
+        "default": "intermediate",
+        "enum": [
+          "beginner",
+          "intermediate",
+          "advanced"
+        ],
+        "title": "Difficulty",
+        "type": "string"
+      },
+      "style_id": {
+        "default": "default",
+        "title": "Style Id",
+        "type": "string"
+      },
+      "steps": {
+        "items": {
+          "$ref": "#/$defs/LessonStep"
+        },
+        "maxItems": 40,
+        "minItems": 1,
+        "title": "Steps",
+        "type": "array"
+      },
+      "meta": {
+        "$ref": "#/$defs/LessonMeta"
+      }
+    },
+    "required": [
+      "lesson_id",
+      "title",
+      "steps"
+    ],
+    "title": "LessonScript",
+    "type": "object"
+  }
+}

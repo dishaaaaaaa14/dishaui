@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "updated": "2026-10-27",
+  "policy": "Weights are fetched into models/ and are never committed. Each entry pins a source revision and records its license.",
+  "profiles": {
+    "demo_gpu": "Qwen3-4B-Instruct + core English stack",
+    "safe_gpu": "Phi-4-mini + core English stack",
+    "cpu": "Llama 3.2 3B + core English stack",
+    "indic": "Core + IndicTrans2 + Indic Parler-TTS",
+    "optional": "faster-whisper and other non-critical extras",
+    "all": "Everything"
+  },
+  "entries": [
+    {
+      "id": "qwen3-4b-instruct-2507",
+      "job": "lesson script + board-action JSON",
+      "profiles": ["demo_gpu"],
+      "source": {
+        "type": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M"
+      },
+      "runtime": "ollama",
+      "device": "gpu",
+      "size_gb": 2.5,
+      "license": "Apache-2.0",
+      "license_file": "Apache-2.0.txt",
+      "license_url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "gated": false,
+      "notes": "Non-thinking instruct variant. Set OLLAMA_FLASH_ATTENTION=1 and OLLAMA_KV_CACHE_TYPE=q8_0."
+    },
+    {
+      "id": "phi4-mini-3.8b",
+      "job": "VRAM-safe lesson script fallback",
+      "profiles": ["safe_gpu"],
+      "source": {
+        "type": "ollama",
+        "model": "phi4-mini:3.8b"
+      },
+      "runtime": "ollama",
+      "device": "gpu",
+      "size_gb": 2.5,
+      "license": "MIT",
+      "license_file": "MIT.txt",
+      "license_url": "https://huggingface.co/microsoft/Phi-4-mini-instruct",
+      "gated": false,
+      "notes": "MIT weights. Use when free VRAM is below 3.3 GB."
+    },
+    {
+      "id": "llama32-3b",
+      "job": "CPU-only fallback",
+      "profiles": ["cpu"],
+      "source": {
+        "type": "ollama",
+        "model": "llama3.2:3b"
+      },
+      "runtime": "ollama",
+      "device": "cpu",
+      "size_gb": 2.0,
+      "license": "Llama-3.2-Community",
+      "license_file": "Llama-3.2-Community.txt",
+      "license_url": "https://www.llama.com/llama3_2/license/",
+      "gated": false,
+      "notes": "Community license, not OSI. Fine for the demo; review before commercial distribution."
+    },
+    {
+      "id": "bge-m3",
+      "job": "multilingual embeddings",
+      "profiles": ["core"],
+      "source": {
+        "type": "hf",
+        "repo": "BAAI/bge-m3",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "allow_patterns": ["onnx/*", "config.json", "tokenizer.json", "tokenizer_config.json", "special_tokens_map.json", "sentencepiece.bpe.model"]
+      },
+      "runtime": "onnxruntime",
+      "device": "cpu",
+      "size_gb": 2.3,
+      "license": "MIT",
+      "license_file": "MIT.txt",
+      "license_url": "https://huggingface.co/BAAI/bge-m3",
+      "gated": false,
+      "notes": "Use the onnx/ export. Multilingual, supports Kannada and Hindi."
+    },
+    {
+      "id": "bge-reranker-v2-m3",
+      "job": "cross-encoder reranker",
+      "profiles": ["core"],
+      "source": {
+        "type": "hf",
+        "repo": "BAAI/bge-reranker-v2-m3",
+        "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+        "allow_patterns": ["config.json", "model.safetensors", "tokenizer.json", "tokenizer_config.json", "special_tokens_map.json", "sentencepiece.bpe.model"]
+      },
+      "runtime": "torch-cpu",
+      "device": "cpu",
+      "size_gb": 2.3,
+      "license": "Apache-2.0",
+      "license_file": "Apache-2.0.txt",
+      "license_url": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
+      "gated": false,
+      "notes": "No official ONNX export. Runs on CPU torch; rerank only the top 20 candidates."
+    },
+    {
+      "id": "smolvlm-500m-instruct",
+      "job": "teaching image captions and diagram descriptions",
+      "profiles": ["core"],
+      "source": {
+        "type": "hf",
+        "repo": "HuggingFaceTB/SmolVLM-500M-Instruct",
+        "revision": "a7da5b986cb59b408707209984f360a5f4ad7e47",
+        "allow_patterns": ["*.json", "*.txt", "model.safetensors", "merges.txt", "vocab.json"]
+      },
+      "runtime": "torch-cpu",
+      "device": "cpu",
+      "size_gb": 1.0,
+      "license": "Apache-2.0",
+      "license_file": "Apache-2.0.txt",
+      "license_url": "https://huggingface.co/HuggingFaceTB/SmolVLM-500M-Instruct",
+      "gated": false,
+      "notes": "0.5B native-transformers image-text model. CPU only; descriptions are cached. Uses 512px image tiles for label reading."
+    },
+    {
+      "id": "kokoro-82m",
+      "job": "English speech",
+      "profiles": ["core"],
+      "source": {
+        "type": "hf",
+        "repo": "hexgrad/Kokoro-82M",
+        "revision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+        "allow_patterns": ["config.json", "kokoro-v1_0.pth", "voices/af_heart.pt", "voices/bf_emma.pt", "voices/am_michael.pt", "README.md", "VOICES.md"]
+      },
+      "runtime": "torch-cpu",
+      "device": "cpu",
+      "size_gb": 0.4,
+      "license": "Apache-2.0",
+      "license_file": "Apache-2.0.txt",
+      "license_url": "https://huggingface.co/hexgrad/Kokoro-82M",
+      "gated": false,
+      "notes": "English only. Avoid espeak-ng fallback for a clean commercial build; use misaki English G2P."
+    },
+    {
+      "id": "docling-layout-heron",
+      "job": "PDF layout analysis",
+      "profiles": ["core"],
+      "source": {
+        "type": "hf",
+        "repo": "docling-project/docling-layout-heron",
+        "revision": "8f39ad3c0b4c58e9c2d2c84a38465abf757272d8",
+        "allow_patterns": ["config.json", "model.safetensors", "preprocessor_config.json", "README.md"]
+      },
+      "dest": "docling/docling-project--docling-layout-heron",
+      "runtime": "torch-cpu",
+      "device": "cpu",
+      "size_gb": 0.2,
+      "license": "Apache-2.0",
+      "license_file": "Apache-2.0.txt",
+      "license_url": "https://huggingface.co/docling-project/docling-layout-heron",
+      "gated": false,
+      "notes": "Heron RT-DetRv2 layout model used by Docling's PDF pipeline. Prefetched into models/docling for offline use."
+    },
+    {
+      "id": "docling-models",
+      "job": "PDF table structure",
+      "profiles": ["core"],
+      "source": {
+        "type": "hf",
+        "repo": "docling-project/docling-models",
+        "revision": "fc0f2d45e2218ea24bce5045f58a389aed16dc23",
+        "allow_patterns": ["config.json", "README.md", "model_artifacts/tableformer/*"]
+      },
+      "dest": "docling/docling-project--docling-models",
+      "runtime": "torch-cpu",
+      "device": "cpu",
+      "size_gb": 0.4,
+      "license": "CDLA-Permissive-2.0 OR Apache-2.0",
+      "license_file": "Community-Data-License-Agreement-Permissive-2.0.txt",
+      "license_url": "https://huggingface.co/docling-project/docling-models",
+      "gated": false,
+      "notes": "TableFormer v2.3.0 weights used by Docling's table structure stage. Prefetched into models/docling for offline use."
+    },
+    {
+      "id": "docling-layout-heron-onnx",
+      "job": "optional ONNX layout variant",
+      "profiles": ["optional"],
+      "source": {
+        "type": "hf",
+        "repo": "docling-project/docling-layout-heron-onnx",
+        "revision": "40bde044036bb181c130ddf6c51792187268748f",
+        "allow_patterns": ["config.json", "model.onnx", "preprocessor_config.json", "README.md"]
+      },
+      "dest": "docling/docling-project--docling-layout-heron-onnx",
+      "runtime": "onnxruntime",
+      "device": "cpu",
+      "size_gb": 0.2,
+      "license": "Apache-2.0",
+      "license_file": "Apache-2.0.txt",
+      "license_url": "https://huggingface.co/docling-project/docling-layout-heron-onnx",
+      "gated": false,
+      "notes": "Optional CPU ONNX export of Heron. B5 uses the torch layout model by default."
+    },
+    {
+      "id": "faster-whisper-small",
+      "job": "optional voice input + word timestamps",
+      "profiles": ["optional"],
+      "source": {
+        "type": "hf",
+        "repo": "Systran/faster-whisper-small",
+        "revision": "536b0662742c02347bc0e980a01041f333bce120",
+        "allow_patterns": ["config.json", "model.bin", "tokenizer.json", "vocabulary.txt"]
+      },
+      "runtime": "ctranslate2",
+      "device": "cpu",
+      "size_gb": 0.5,
+      "license": "MIT",
+      "license_file": "MIT.txt",
+      "license_url": "https://huggingface.co/Systran/faster-whisper-small",
+      "gated": false,
+      "notes": "Optional in v1. Can also force-align Kokoro audio to replace char-proportional sync."
+    },
+    {
+      "id": "indic-parler-tts",
+      "job": "Kannada / Hindi speech (pre-generated)",
+      "profiles": ["indic"],
+      "source": {
+        "type": "hf",
+        "repo": "ai4bharat/indic-parler-tts",
+        "revision": "660bc53c64ae83150613264111708a0465211237",
+        "allow_patterns": ["config.json", "generation_config.json", "model.safetensors", "preprocessor_config.json", "special_tokens_map.json", "tokenizer.json", "tokenizer.model", "tokenizer_config.json"]
+      },
+      "runtime": "torch-cpu",
+      "device": "cpu",
+      "size_gb": 3.6,
+      "license": "Apache-2.0",
+      "license_file": "Apache-2.0.txt",
+      "license_url": "https://huggingface.co/ai4bharat/indic-parler-tts",
+      "gated": true,
+      "notes": "Gated repo: accept the model terms on Hugging Face and export HF_TOKEN. Pre-generate and cache; never realtime on this hardware."
+    },
+    {
+      "id": "flan-t5-large-tokenizer",
+      "job": "Indic Parler voice-description tokenizer",
+      "profiles": ["indic"],
+      "source": {
+        "type": "hf",
+        "repo": "google/flan-t5-large",
+        "revision": "0613663d0d48ea86ba8cb3d7a44f0f65dc596a2a",
+        "allow_patterns": ["special_tokens_map.json", "tokenizer.json", "tokenizer_config.json"]
+      },
+      "dest": "flan-t5-large",
+      "runtime": "torch-cpu",
+      "device": "cpu",
+      "size_gb": 0.01,
+      "license": "Apache-2.0",
+      "license_file": "Apache-2.0.txt",
+      "license_url": "https://huggingface.co/google/flan-t5-large",
+      "gated": false,
+      "notes": "Only the tokenizer is needed for the Indic Parler voice-description encoder; weights are not downloaded."
+    },
+    {
+      "id": "indictrans2-en-indic-dist-200M",
+      "job": "English to Kannada/Hindi translation",
+      "profiles": ["indic"],
+      "source": {
+        "type": "hf",
+        "repo": "ai4bharat/indictrans2-en-indic-dist-200M",
+        "revision": "2cfd0a20057756d756bf3e53528f492afc52f91a",
+        "allow_patterns": ["config.json", "generation_config.json", "model.safetensors", "dict.SRC.json", "dict.TGT.json", "model.SRC", "model.TGT", "configuration_indictrans.py", "modeling_indictrans.py", "tokenization_indictrans.py", "special_tokens_map.json", "tokenizer_config.json", "LICENSE"]
+      },
+      "runtime": "torch-cpu",
+      "device": "cpu",
+      "size_gb": 0.9,
+      "license": "MIT",
+      "license_file": "MIT.txt",
+      "license_url": "https://huggingface.co/ai4bharat/indictrans2-en-indic-dist-200M",
+      "gated": true,
+      "notes": "Gated repo: accept terms and export HF_TOKEN. Protect LaTeX spans before translation."
+    }
+  ],
+  "not_shipped": [
+    {
+      "id": "qwen2.5-vl-3b",
+      "reason": "Repo LICENSE remains Qwen Research (non-commercial) despite Apache metadata in README."
+    },
+    {
+      "id": "piper-lessac",
+      "reason": "Piper is GPL-3.0-or-later; en_US-lessac-medium is trained on Blizzard 2013 research-only data."
+    },
+    {
+      "id": "meta-mms",
+      "reason": "MMS weights are CC-BY-NC 4.0 (non-commercial)."
+    }
+  ]
+}

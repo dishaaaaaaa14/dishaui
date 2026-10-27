@@ -1,0 +1,3 @@
+# Compatibility shim. Prefer a profile file from requirements/:
+#   base.txt, cpu.txt, ingest.txt, rag.txt, render.txt, tts.txt, dev.txt
+-r requirements/all.txt

@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Runtime
+data/
+logs/
+artifacts/
+models/
+dist/
+build/
+*.spec
+.env
+.env.*
+!.env.example
+
+# Weights and audio (fetched, never committed)
+*.gguf
+*.onnx
+*.onnx_data
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.wav
+*.mp3
+*.flac
+
+# Keep manifests and license sidecars
+!assets/images/MANIFEST.json
+!MODEL_LICENSES/*.txt
+!LICENSES/*.txt
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

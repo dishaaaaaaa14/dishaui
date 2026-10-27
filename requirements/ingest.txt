@@ -1,0 +1,12 @@
+# Material ingestion. Docling brings torch; install requirements/cpu.txt first.
+docling==2.143.0
+python-pptx>=1.0.2,<2
+pdfplumber>=0.11
+pypdf>=5.0
+pypdfium2>=4.30,!=4.30.1
+tokenizers>=0.20
+# Optional OCR. Keep disabled by default; the Tesseract binary must also be installed.
+pytesseract>=0.3.13
+# Optional, not installed by default (large, torch-based):
+# paddleocr>=2.8
+# pix2tex>=0.1.4
