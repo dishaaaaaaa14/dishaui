@@ -48,10 +48,17 @@ class SpeechTrack:
         return path
 
 
-def _cache_key(text: str, voice: str, speed: float, sample_rate: int) -> str:
+def _cache_key(
+    text: str,
+    voice: str,
+    speed: float,
+    sample_rate: int,
+    engine: str = "kokoro",
+) -> str:
     payload = "|".join(
         (
             config.TTS_CACHE_VERSION,
+            engine,
             config.KOKORO_REVISION,
             voice,
             f"{speed:.6f}",
@@ -78,10 +85,11 @@ class SpeechCache:
         voice: str,
         speed: float,
         sample_rate: int,
+        engine: str = "kokoro",
     ) -> np.ndarray | None:
         import soundfile as sf
 
-        key = _cache_key(text, voice, speed, sample_rate)
+        key = _cache_key(text, voice, speed, sample_rate, engine)
         wav_path, meta_path = self._paths(key)
         if not wav_path.is_file() or not meta_path.is_file():
             return None
@@ -104,10 +112,11 @@ class SpeechCache:
         speed: float,
         sample_rate: int,
         samples: np.ndarray,
+        engine: str = "kokoro",
     ) -> None:
         import soundfile as sf
 
-        key = _cache_key(text, voice, speed, sample_rate)
+        key = _cache_key(text, voice, speed, sample_rate, engine)
         wav_path, meta_path = self._paths(key)
         sample_data = np.asarray(samples, dtype=np.float32).reshape(-1)
         tmp_wav = wav_path.with_suffix(".tmp.wav")
@@ -118,6 +127,7 @@ class SpeechCache:
             "text": text,
             "voice": voice,
             "speed": speed,
+            "engine": engine,
             "sample_rate": sample_rate,
             "duration_ms": round(len(sample_data) / sample_rate * 1000),
         }

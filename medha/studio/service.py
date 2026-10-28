@@ -38,6 +38,7 @@ class StudioOptions:
     tts: bool = True
     voice: str = config.KOKORO_VOICE
     speed: float = config.KOKORO_SPEED
+    language: LanguageCode = "en"
 
     def request(self) -> GenerationRequest:
         return GenerationRequest(
@@ -65,8 +66,7 @@ class StudioResult:
 
 
 def _lesson_path(lesson: LessonScript) -> Path:
-    suffix = "" if lesson.language == "en" else f"-{lesson.language}"
-    return config.LESSON_CONTENT_DIR / f"{lesson.lesson_id}{suffix}.json"
+    return config.LESSON_CONTENT_DIR / f"{lesson.lesson_id}.json"
 
 
 def _translate(

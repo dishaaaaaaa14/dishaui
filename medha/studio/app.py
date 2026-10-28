@@ -563,9 +563,11 @@ class StudioWindow(QMainWindow):
             return
         selected = self._selected_library_id()
         subject = self.library_subject.currentData()
+        language = self.library_language.currentData()
         filters = LibraryFilter(
             query=self.library_search.text().strip() or None,
             subject=str(subject) if subject else None,
+            language=str(language) if language else None,
             favorite=True if self.library_favorites.isChecked() else None,
             limit=500,
         )
@@ -581,8 +583,8 @@ class StudioWindow(QMainWindow):
             star = "★" if lesson.favorite else "·"
             item = QListWidgetItem(
                 f"{star} {lesson.title}\n"
-                f"{lesson.subject} · {lesson.difficulty} · {lesson.steps} steps"
-                f" · {lesson.score}/100"
+                f"{lesson.subject} · {lesson.difficulty} · {lesson.language}"
+                f" · {lesson.steps} steps · {lesson.score}/100"
             )
             item.setData(Qt.ItemDataRole.UserRole, lesson.lesson_id)
             item.setToolTip(lesson.path)
@@ -610,7 +612,10 @@ class StudioWindow(QMainWindow):
             summary = self.library.checkpoint_summary(lesson.lesson_id) if self.library else None
         except Exception:
             summary = None
-        detail = f"{lesson.score}/100 · {lesson.actions} actions · {lesson.path}"
+        detail = (
+            f"{lesson.score}/100 · {lesson.language} · "
+            f"{lesson.actions} actions · {lesson.path}"
+        )
         if summary is not None and summary.attempts:
             detail += (
                 f"\nCheckpoints: {summary.correct}/{summary.attempts} correct"
@@ -747,8 +752,9 @@ class StudioWindow(QMainWindow):
         report = result.report
         self.meta_label.setText(
             f"{lesson.title}\n"
-            f"{lesson.subject} / {lesson.difficulty} / {len(lesson.steps)} steps"
-            f" / {actions} actions / {result.playback.duration_ms / 1000:.1f}s\n"
+            f"{lesson.subject} / {lesson.difficulty} / {lesson.language}"
+            f" / {len(lesson.steps)} steps / {actions} actions"
+            f" / {result.playback.duration_ms / 1000:.1f}s\n"
             f"{result.path if result.path is not None else lesson.lesson_id}"
         )
         self.quality_label.setText(
@@ -873,10 +879,12 @@ class StudioWindow(QMainWindow):
         return tuple(paths)
 
     def _options(self) -> StudioOptions:
+        language = cast(LanguageCode, self.language.currentData() or "en")
         return StudioOptions(
             topic=self.topic.text().strip(),
             subject=self.subject.currentText(),
             difficulty=self.difficulty.currentText(),
+            language=language,
             audience=self.audience.text().strip() or config.LESSON_DEFAULT_AUDIENCE,
             steps=self.steps.value(),
             rag_query=self.rag_query.text().strip() or None,
@@ -1027,6 +1035,11 @@ class StudioWindow(QMainWindow):
         difficulty = self._settings.get("difficulty")
         if isinstance(difficulty, str) and difficulty in DIFFICULTIES:
             self.difficulty.setCurrentText(difficulty)
+        language = self._settings.get("language")
+        if isinstance(language, str) and language in config.LANGUAGE_NAMES:
+            index = self.language.findData(language)
+            if index >= 0:
+                self.language.setCurrentIndex(index)
         steps = self._settings.get("steps")
         if isinstance(steps, int):
             self.steps.setValue(max(1, min(config.LESSON_MAX_STEPS, steps)))
@@ -1054,6 +1067,7 @@ class StudioWindow(QMainWindow):
             "use_ocr": self.use_ocr.isChecked(),
             "subject": self.subject.currentText(),
             "difficulty": self.difficulty.currentText(),
+            "language": self.language.currentData() or "en",
             "steps": self.steps.value(),
             "audience": self.audience.text().strip(),
         }

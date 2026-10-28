@@ -8,7 +8,7 @@ import config
 from medha.core.schema import LanguageCode, LessonScript, split_sentences
 
 from .protect import MathProtector, ProtectedText
-from .translator import Translator, TranslationError, default_translator
+from .translator import TranslationError, Translator, default_translator
 
 
 def _clip(value: str, limit: int, fallback: str) -> str:
@@ -127,6 +127,9 @@ def translate_lesson(
 
     payload = lesson.model_dump(mode="python")
     payload["language"] = target
+    payload["lesson_id"] = (
+        f"{lesson.lesson_id[: 63 - len(target)]}-{target}"
+    )
     payload["title"] = _clip(tr(lesson.title), 200, lesson.title)
     if lesson.target_concept:
         payload["target_concept"] = _clip(
@@ -135,6 +138,7 @@ def translate_lesson(
     meta = payload.setdefault("meta", {})
     meta["translated_from"] = lesson.language
     meta["translation_model"] = model_id
+    meta["source_lesson_id"] = lesson.lesson_id
 
     step_payloads = payload["steps"]
     for step, step_payload in zip(lesson.steps, step_payloads, strict=True):

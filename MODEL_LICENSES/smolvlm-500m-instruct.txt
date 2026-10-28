@@ -3,7 +3,7 @@ Job: teaching image captions and diagram descriptions
 License: Apache-2.0
 Source: https://huggingface.co/HuggingFaceTB/SmolVLM-500M-Instruct
 Revision: a7da5b986cb59b408707209984f360a5f4ad7e47
-Fetched: 2026-10-27T09:11:54+00:00
+Fetched: 2026-10-28T07:51:58+00:00
 ------------------------------------------------------------------------
 Apache License
 Version 2.0, January 2004

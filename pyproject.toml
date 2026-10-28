@@ -28,7 +28,16 @@ no_implicit_optional = true
 check_untyped_defs = true
 
 [[tool.mypy.overrides]]
-module = ["OpenGL", "kokoro", "onnxruntime", "sounddevice", "soundfile"]
+module = [
+    "OpenGL",
+    "IndicTransToolkit.*",
+    "kokoro",
+    "onnxruntime",
+    "parler_tts",
+    "scipy.*",
+    "sounddevice",
+    "soundfile",
+]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

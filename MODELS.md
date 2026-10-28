@@ -16,6 +16,7 @@ Weights are **fetched, never committed**. `models.lock.json` is the source of tr
 | `docling-layout-heron-onnx` | optional ONNX layout variant | `optional` | onnxruntime | cpu | 0.2 GB | Apache-2.0 | no |
 | `faster-whisper-small` | optional voice input + word timestamps | `optional` | ctranslate2 | cpu | 0.5 GB | MIT | no |
 | `indic-parler-tts` | Kannada / Hindi speech (pre-generated) | `indic` | torch-cpu | cpu | 3.6 GB | Apache-2.0 | **yes** |
+| `flan-t5-large-tokenizer` | Indic Parler voice-description tokenizer | `indic` | torch-cpu | cpu | 0.01 GB | Apache-2.0 | no |
 | `indictrans2-en-indic-dist-200M` | English to Kannada/Hindi translation | `indic` | torch-cpu | cpu | 0.9 GB | MIT | **yes** |
 
 ## Profiles
@@ -47,4 +48,4 @@ python tools/fetch_models.py --verify
 - BGE-M3 ONNX embeddings and the BGE reranker are CPU-only and use about 4.5 GB RAM when both are warm.
 - SmolVLM-500M is CPU-only and adds about 1 GB of weights. Image descriptions are cached; the first cold description can take 15-20 seconds.
 
-Generated from `models.lock.json` on 2026-10-27T09:11:53+00:00.
+Generated from `models.lock.json` on 2026-10-28T07:51:55+00:00.

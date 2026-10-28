@@ -18,7 +18,7 @@ from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, model_validator
 
 SCHEMA_ID = "medha.board-action"
 SCHEMA_VERSION: Final[Literal["1.0.0"]] = "1.0.0"
-SENTENCE_RE = re.compile(r"(?<=[.!??])\s+")
+SENTENCE_RE = re.compile(r"(?<=[.!?।])\s+")
 ID_RE = r"^[A-Za-z][A-Za-z0-9_-]{0,31}$"
 LESSON_ID_RE = r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$"
 
@@ -46,7 +46,8 @@ ShapeName = Literal[
     "graph",
     "grid",
 ]
-Align = Literal["left", "center", "right"]\nLanguageCode = Literal["en", "hi", "kn"]
+Align = Literal["left", "center", "right"]
+LanguageCode = Literal["en", "hi", "kn"]
 LINE_SHAPES = {"line", "arrow", "polyline"}
 RECT_SHAPES = {
     "circle",
@@ -269,6 +270,9 @@ class LessonMeta(StrictModel):
     created_at: str | None = None
     estimated_duration_s: float | None = Field(default=None, ge=0.0)
     sources: list[str] = Field(default_factory=list, max_length=50)
+    translated_from: LanguageCode | None = None
+    translation_model: str | None = None
+    source_lesson_id: str | None = None
 
 
 class LessonScript(StrictModel):
@@ -278,6 +282,7 @@ class LessonScript(StrictModel):
     subject: Subject = "general"
     target_concept: str | None = Field(default=None, max_length=120)
     difficulty: Literal["beginner", "intermediate", "advanced"] = "intermediate"
+    language: LanguageCode = "en"
     style_id: str = "default"
     steps: list[LessonStep] = Field(min_length=1, max_length=40)
     meta: LessonMeta = Field(default_factory=LessonMeta)

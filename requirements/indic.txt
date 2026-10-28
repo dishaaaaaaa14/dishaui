@@ -1,0 +1,6 @@
+# Optional Kannada/Hindi stack. Install requirements/cpu.txt first.
+# Both models are gated: accept their terms on Hugging Face and export HF_TOKEN.
+IndicTransToolkit>=1.0.3
+parler-tts @ git+https://github.com/huggingface/parler-tts.git
+nltk>=3.9
+sacremoses>=0.1

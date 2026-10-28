@@ -3,7 +3,7 @@ Job: multilingual embeddings
 License: MIT
 Source: https://huggingface.co/BAAI/bge-m3
 Revision: 5617a9f61b028005a4858fdac845db406aefb181
-Fetched: 2026-10-27T09:11:54+00:00
+Fetched: 2026-10-28T07:51:58+00:00
 ------------------------------------------------------------------------
 MIT License
 
