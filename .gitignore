@@ -42,3 +42,6 @@ build/
 Thumbs.db
 .idea/
 .vscode/
+
+# Node
+node_modules/
